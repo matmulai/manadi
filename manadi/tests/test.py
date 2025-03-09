@@ -1,6 +1,6 @@
 import os
 import pytest
-from manadiai.logger import GenAILogger
+from manadi.logger import GenAILogger
 
 @pytest.fixture
 def test_filepath(tmp_path):

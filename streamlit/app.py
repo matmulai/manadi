@@ -1,6 +1,6 @@
 import streamlit as st
 from openai import OpenAI
-from manadiai.logger import GenAILogger
+from manadi.logger import GenAILogger
 import logging
 
 # Logging configuration
@@ -9,7 +9,7 @@ logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s 
 # Initialize logger
 logger = GenAILogger("interactions.jsonl")
 
-st.title("🧠 ManadiAI Chat & Logger")
+st.title("🧠 Manadi Chat & Logger")
 
 # Sidebar to enter OpenAI API key
 st.sidebar.header("API Configuration")
