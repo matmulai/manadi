@@ -1,25 +1,58 @@
 import streamlit as st
+from openai import OpenAI
 from manadiai.logger import GenAILogger
+import logging
 
-logger = GenAILogger(storage_path="interactions.jsonl")
+# Logging configuration
+logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-st.title("🧠 ManadiAI Interaction Logger")
+# Initialize logger
+logger = GenAILogger("interactions.jsonl")
 
-st.sidebar.header("Log a new interaction")
+st.title("🧠 ManadiAI Chat & Logger")
 
-prompt = st.sidebar.text_area("Prompt")
-response = st.sidebar.text_area("Response")
-feedback = st.sidebar.text_area("Feedback (optional)")
+# Sidebar to enter OpenAI API key
+st.sidebar.header("API Configuration")
+api_key = st.sidebar.text_input("Enter OpenAI API key:", type="password")
 
-if st.sidebar.button("Log Interaction"):
-    if prompt and response:
-        logger.log_interaction(prompt, response, feedback)
-        st.sidebar.success("✅ Interaction logged successfully!")
+# Main prompt input
+st.header("🚀 Chat with GenAI")
+prompt = st.text_area("Enter your prompt:")
+
+if st.button("Generate Response"):
+    if not api_key:
+        st.error("⚠️ Please enter your OpenAI API key.")
+    elif not prompt:
+        st.error("⚠️ Please enter a prompt.")
     else:
-        st.sidebar.error("⚠️ Prompt and response are required.")
+        import openai
+        openai.api_key = api_key
 
-st.header("📚 Logged Interactions")
+        with st.spinner("Generating response..."):
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}]
+            )
+            ai_response = response.choices[0].message.content.strip()
 
+        st.subheader("🤖 Response")
+        st.write(ai_response)
+
+        # Log automatically
+        logger.log_interaction(prompt, ai_response)
+        st.success("✅ Interaction logged successfully!")
+
+# Optional Feedback
+feedback = st.text_area("Provide feedback (optional):")
+if st.button("Submit Feedback"):
+    interactions = logger.get_all_interactions()
+    if interactions:
+        interactions[-1]['feedback'] = feedback
+        logger.storage.save(interactions[-1])
+        st.success("Feedback recorded!")
+
+# Display past interactions
+st.header("📚 Previous Interactions")
 interactions = logger.get_all_interactions()
 
 if interactions:
