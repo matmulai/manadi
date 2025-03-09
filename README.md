@@ -1,4 +1,4 @@
-# 🚀 manadiai: take your genai data with you
+# 🚀 manadi: take your genai data with you
 
 **Capture, organize, and fine-tune from your GenAI interactions effortlessly.**
 
@@ -6,7 +6,7 @@
 
 ## 📚 Overview
 
-**manadiair** automatically captures and preserves your interactions with Generative AI models—including your prompts, AI responses, and feedback—in structured formats suitable for fine-tuning your own personalized GenAI models.
+**manadi** automatically captures and preserves your interactions with Generative AI models—including your prompts, AI responses, and feedback—in structured formats suitable for fine-tuning your own personalized GenAI models.
 
 ---
 
@@ -25,7 +25,7 @@
 - **Optional Feedback:** Add corrections or feedback directly after each generation.
 - **Automatic Structuring:** Captures are structured in JSONL format, ensuring compatibility with standard fine-tuning tools.
 
-Example structured data entry:
+Example of structured data entry:
 ```json
 {
   "prompt": "What is consistent hashing?",
@@ -48,7 +48,7 @@ Example structured data entry:
 
 Clone the repository:
 ```bash
-git clone https://github.com/matmulai/manadiai.git
+git clone https://github.com/matmulai/manadi.git
 cd manadiai
 ```
 
