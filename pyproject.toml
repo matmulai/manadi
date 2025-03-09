@@ -3,26 +3,26 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "manadiai"
+name = "manadi"
 version = "0.1.0"
 description = "Capture, organize, and reuse GenAI interactions to fine-tune your personalized AI."
-authors = [
-  { name="Your Name", email="your.email@example.com" }
-]
-license = {text = "MIT"}
+authors = [{ name="Gaurav Sood", email="gsood07@gmail.com" }]
+license = { text="MIT" }
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-  "python-dateutil"
+    "openai>=1.13.0",
+    "python-dateutil>=2.8.2"
 ]
 
 [project.optional-dependencies]
 dev = [
-  "pytest>=7.0",
-  "pytest-cov>=4.0",
-  "black>=23.0",
-  "flake8>=6.0",
-  "mypy>=1.0"
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=24.0.0",
+    "flake8>=6.1.0",
+    "mypy>=1.8.0",
+    "streamlit>=1.32.0"
 ]
 
 [tool.black]
@@ -35,12 +35,9 @@ ignore = ["E203", "W503"]
 [tool.pytest.ini_options]
 minversion = "7.0"
 addopts = "-ra -q --cov=manadiai --cov-report=term-missing"
-testpaths = [
-    "tests"
-]
+testpaths = ["tests"]
 
 [tool.mypy]
 python_version = "3.8"
 strict = true
 ignore_missing_imports = true
-
