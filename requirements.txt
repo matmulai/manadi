@@ -1,0 +1,4 @@
+streamlit>=1.32.0
+python-dateutil>=2.8.2
+openai>=1.13.0
+manadiai @ file://<local-path-to-manadiai-package>
